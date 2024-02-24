@@ -3,6 +3,7 @@ import { PaperProvider } from 'react-native-paper';
 import { CounterM3Screen } from './src/presentation/screens/CounterM3Screen';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import { HomeWorkSceen } from './src/presentation/screens/HomeWorkSceen';
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
       <SafeAreaView style={{ flex: 1 }}>
         {/* <HelloWordldPage name='Javat Plascencia' /> */}
         {/* <CounterScreen /> */}
-        <CounterM3Screen />
+        {/* <CounterM3Screen /> */}
+        <HomeWorkSceen />
       </SafeAreaView>
     </PaperProvider>
   )
