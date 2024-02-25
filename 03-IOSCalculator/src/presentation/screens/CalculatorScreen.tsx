@@ -9,6 +9,7 @@ export const CalculatorScreen = () => {
   const { 
     number,
     prevNumber,
+    formula,
     buildNumber, 
     toggleSign, 
     clean, 
@@ -29,15 +30,21 @@ export const CalculatorScreen = () => {
           adjustsFontSizeToFit
           numberOfLines={1}
           >
-            { number }
+            { formula }
         </Text>
-        <Text 
-          style={ styles.subResult }
-          adjustsFontSizeToFit
-          numberOfLines={1}
-        >
-            { ( prevNumber === '0' ) ? ' ' : prevNumber }
-        </Text>
+        {
+          ( formula === prevNumber )
+            ? <Text style={ styles.subResult }></Text>
+            : (
+              <Text 
+                style={ styles.subResult }
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >
+                  { prevNumber }
+              </Text>
+            )
+        }
       </View>
 
       <View style={ styles.row }>
