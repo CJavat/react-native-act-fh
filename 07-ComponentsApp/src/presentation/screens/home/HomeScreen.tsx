@@ -18,7 +18,7 @@ const animationMenuItems = [
   },
 ]
 
-export const menuItems = [
+const menuItems = [
   // 02-menuItems
   {
     name: 'Pull to refresh',
