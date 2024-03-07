@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CustomView } from "../../components/ui/CustomView"
-import { Switch } from "react-native";
 import { Card } from "../../components/ui/Card";
 import { CustomSwitch } from "../../components/ui/CustomSwitch";
 import { Separator } from "../../components/ui/Separator";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export const SwitchScreen = () => {
+  const { colors } = useContext( ThemeContext );
   const [ state, setState ] = useState({
     isActive: true,
     isHungry: false,

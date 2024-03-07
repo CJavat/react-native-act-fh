@@ -3,9 +3,11 @@ import { CustomView } from "../../components/ui/CustomView"
 import { Title } from "../../components/ui/Title"
 import { globalStyles } from "../../../config/theme/theme"
 import { Card } from "../../components/ui/Card"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ThemeContext } from "../../context/ThemeContext"
 
 export const TextInputScreen = () => {
+  const { colors } = useContext( ThemeContext );
 
   const [form, setform] = useState({
     name: '',
@@ -23,7 +25,8 @@ export const TextInputScreen = () => {
 
           <Card>
             <TextInput 
-              style={ globalStyles.input }
+              style={[ globalStyles.input, { color: colors.text, borderColor: colors.text } ]}
+              placeholderTextColor={ colors.text }
               placeholder="Nombre Completo"
               autoCapitalize="words"
               autoCorrect={ false }
@@ -31,7 +34,8 @@ export const TextInputScreen = () => {
             />
 
             <TextInput 
-              style={ globalStyles.input }
+              style={[ globalStyles.input, { color: colors.text, borderColor: colors.text } ]}
+              placeholderTextColor={ colors.text }
               placeholder="Correo Electrónico"
               autoCapitalize="none"
               autoCorrect={ false }
@@ -40,7 +44,8 @@ export const TextInputScreen = () => {
             />
 
             <TextInput 
-              style={ globalStyles.input }
+              style={[ globalStyles.input, { color: colors.text, borderColor: colors.text } ]}
+              placeholderTextColor={ colors.text }
               placeholder="Correo Electrónico"
               keyboardType="phone-pad"
               onChangeText={ value => setform({ ...form, phone: value }) }
@@ -50,20 +55,20 @@ export const TextInputScreen = () => {
           <View style={{ height: 10 }} />
 
           <Card>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
-            <Text>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
+            <Text style={{ color: colors.text }}>{ JSON.stringify( form, null, 2 ) }</Text>
           </Card>
         </CustomView>
 
