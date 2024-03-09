@@ -1,8 +1,11 @@
+import {enableLatestRenderer} from 'react-native-maps';
 import 'react-native-gesture-handler';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './presentation/navigation/StackNavigator';
 import { PermissionsChecker } from './presentation/providers/PermissionsChecker';
+
+enableLatestRenderer();
 
 export const MapsApp = () => {
   return (
