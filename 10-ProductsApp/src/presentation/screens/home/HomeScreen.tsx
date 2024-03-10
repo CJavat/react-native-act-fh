@@ -2,10 +2,12 @@ import { Button, Icon, Layout, Text } from '@ui-kitten/components';
 import { useAuthStore } from '../../store/auth/useAuthStore';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from '../../navigation/StackNavigator';
+import { getProductsByPage } from '../../../actions/products/get-products-by-page';
 
 export const HomeScreen = () => {
   const navigate = useNavigation<NavigationProp<RootStackParams>>();
   const { logout } = useAuthStore();
+  getProductsByPage(0);
 
   const onLogOut = () => {
 

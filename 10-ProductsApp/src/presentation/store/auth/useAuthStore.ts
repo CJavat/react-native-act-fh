@@ -3,6 +3,8 @@ import { User } from "../../../domain/entities/user";
 import { AuthStatus } from "../../../infrastructure/interfaces/auth.status";
 import { authCheckStatus, authLogin } from "../../../actions/auth/auth";
 import { StorageAdapter } from "../../../config/adapters/storage-adapter";
+import { tesloApi } from "../../../config/api/tesloApi";
+import { AuthResponse } from "../../../infrastructure/interfaces/auth.response";
 
 
 export interface AuthState {
@@ -11,6 +13,7 @@ export interface AuthState {
   user?: User;
 
   login: ( email: string, password: string ) => Promise<boolean>;
+  signUp: ( fullName: string, email: string, password: string ) => Promise<boolean>
   checkStatus: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -31,6 +34,17 @@ export const useAuthStore = create<AuthState>()( (set, get) => ({
 
     set({ status: 'authenticated', token: resp.token, user: resp.user });
     return true;
+  },
+
+  signUp: async ( fullName: string, email: string, password: string ) => {
+    try {
+      await tesloApi.post<AuthResponse>('/auth/register', { fullName, email, password });
+      return true;
+    } catch (error) {
+      console.log( error );
+      return false;
+    }
+
   },
 
   checkStatus: async () => {
