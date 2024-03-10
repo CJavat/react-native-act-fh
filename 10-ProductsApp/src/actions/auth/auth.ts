@@ -10,7 +10,6 @@ const returnUserToken = ( data: AuthResponse ) => {
     fullName: data.fullName,
     isActive: data.isActive,
     roles: data.roles,
-    
   }
 
   return {
@@ -33,6 +32,16 @@ export const authLogin = async ( email: string, password: string ) => {
 
   } catch (error) {
     console.log( error );
+    return null;
+  }
+}
+
+export const authCheckStatus = async () => {
+  try {
+    const { data } = await tesloApi.get<AuthResponse>('/auth/check-status');
+    return returnUserToken( data );
+  } catch (error) {
+    console.log({ error });
     return null;
   }
 }

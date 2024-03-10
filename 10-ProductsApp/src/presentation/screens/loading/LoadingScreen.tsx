@@ -1,19 +1,9 @@
-import { Layout } from "@ui-kitten/components"
-import { ScrollView } from "react-native-gesture-handler"
+import { Layout, Spinner } from "@ui-kitten/components"
 
 export const LoadingScreen = () => {
-
-  
-
   return (
-    <Layout>
-      <ScrollView>
-
-      
-
-
-
-      </ScrollView>
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Spinner status="primary" size="large" />
     </Layout>
   )
 }
