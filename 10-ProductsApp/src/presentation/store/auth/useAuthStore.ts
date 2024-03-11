@@ -53,8 +53,8 @@ export const useAuthStore = create<AuthState>()( (set, get) => ({
       set({ status: 'unauthenticated', token: undefined, user: undefined });
     }
 
-    await StorageAdapter.setItem( 'token', resp!.token );
-
+    const token= await StorageAdapter.setItem( 'token', resp!.token );
+    console.log({ token });
     set({ status: 'authenticated', token: resp!.token, user: resp!.user });
   },
 
