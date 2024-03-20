@@ -5,15 +5,14 @@ import { StorageAdapter } from '../adapters/storage-adapter';
 
 export const API_URL = ( STAGE === 'production' )
   ? PROD_URL
-  : Platform.OS === 'ios' 
-    ? API_URL_IOS
-    : API_URL_ANDROID
+  : Platform.OS === 'android' 
+    ? API_URL_ANDROID
+    : API_URL_IOS
 
 const tesloApi = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-
   }
 });
 

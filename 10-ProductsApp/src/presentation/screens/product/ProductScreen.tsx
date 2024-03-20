@@ -1,16 +1,16 @@
 import { Button, ButtonGroup, Input, Layout, Text, useTheme } from "@ui-kitten/components"
 import { MainLayout } from "../../layouts/MainLayout"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { RootStackParams } from "../../navigation/StackNavigator";
 import { StackScreenProps } from "@react-navigation/stack";
 import { getProductById } from "../../../actions/products/get-product-by-id";
 import { useRef } from "react";
-import { FlatList, ScrollView } from "react-native";
-import { FadeInImage } from "../../components/ui/FadeInImage";
+import { ScrollView } from "react-native";
 import { Gender, Product, Size } from "../../../domain/entities/product";
 import { MyIcon } from "../../components/ui/MyIcon";
 import { Formik } from "formik";
 import { updateCreateProduct } from "../../../actions/products/update-create-product";
+import { ProductImages } from "../../components/products/ProductImages";
 
 
 const sizes: Size[] = [ Size.Xs, Size.S, Size.M, Size.L, Size.Xl, Size.Xxl ];
@@ -21,6 +21,7 @@ interface Props extends StackScreenProps<RootStackParams, 'ProductScreen'> {};
 export const ProductScreen = ( { route }: Props ) => {
   const productRef = useRef( route.params.productId );
   const theme = useTheme();
+  const queryClient = useQueryClient();
 
   // useQuery
   const { isLoading, data: product } = useQuery({
@@ -33,8 +34,10 @@ export const ProductScreen = ( { route }: Props ) => {
   const mutation = useMutation({
     mutationFn: ( data: Product ) => updateCreateProduct({ ...data, id: productRef.current }),
     onSuccess( data: Product ) {
-      console.log('success');
-      // console.log(data);
+      productRef.current = data.id;
+      queryClient.invalidateQueries({ queryKey: ['products', 'infinite'] });
+      queryClient.invalidateQueries({ queryKey: ['product', data.id] });
+      // queryClient.setQueryData( ['product', data.id], data );
     },
   });
 
@@ -49,19 +52,8 @@ export const ProductScreen = ( { route }: Props ) => {
         <MainLayout title={ values.title } subTitle={`Precio: ${ values.price }`}>
           <ScrollView style={{ flex: 1 }}>
             {/* Imágenes del producto */}
-            <Layout>
-              <FlatList 
-                data={ values.images }
-                keyExtractor={ (item) => item.toString() }
-                horizontal
-                showsHorizontalScrollIndicator={ false }
-                renderItem={ ({ item }) => (
-                  <FadeInImage 
-                    uri={ item }
-                    style={{ width: 300, height: 300, marginHorizontal: 7 }}
-                  />
-                )}
-              />
+            <Layout style={{ marginVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+              <ProductImages images={ values.images } />
             </Layout>
 
             {/* Formulario */}
@@ -150,8 +142,6 @@ export const ProductScreen = ( { route }: Props ) => {
             >
               Guardar
             </Button>
-            
-            <Text>{ JSON.stringify( values, null, 2 ) }</Text>
 
             <Layout style={{ height: 200 }} />
           </ScrollView>
